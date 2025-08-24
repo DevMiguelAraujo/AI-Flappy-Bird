@@ -1,8 +1,13 @@
-export default function getBirdInclination(speed: number): number{
-  const maxSpeedFalling = 700
-  const maxSpeedFlying = -350
-  const maxFlyingInclination = -0.5
-  const inclination = (speed - maxSpeedFalling) / (maxSpeedFalling - maxSpeedFlying) + maxFlyingInclination
+export default function getBirdInclination(
+  speed: number,
+  upwardSpeedLimit: number,
+  downwardSpeedLimit: number
+): number {
+  if (!speed) return 0;
 
-  return inclination
+  if (speed < 0) {
+    return (speed / (downwardSpeedLimit * -1)) * 0.5;
+  } else {
+    return (speed / upwardSpeedLimit) * 0.5;
+  }
 }
