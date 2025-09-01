@@ -1,11 +1,11 @@
 import type { Bird } from "../../types/types";
 import getBirdInclination from "./movements/getBirdInclination";
 
-export default function setDrawBird(ctx: CanvasRenderingContext2D, { x, y, speed, width, height, downwardSpeedLimit, upwardSpeedLimit, color }: Bird) {
-  return () => {
+export default function setDrawBird(ctx: CanvasRenderingContext2D) {
+  return (Bird: Bird) => {
     ctx.beginPath();
-    ctx.ellipse(x, y, width, height, getBirdInclination(speed, downwardSpeedLimit, upwardSpeedLimit), 0, 2 * Math.PI);
-    ctx.fillStyle = color;
+    ctx.ellipse(Bird.x, Bird.y, Bird.width, Bird.height, getBirdInclination(Bird.speed, Bird.downwardSpeedLimit, Bird.upwardSpeedLimit), 0, 2 * Math.PI);
+    ctx.fillStyle = Bird.color;
     ctx.fill();
   };
 }
